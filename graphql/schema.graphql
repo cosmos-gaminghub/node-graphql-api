@@ -1,0 +1,14 @@
+type Query {
+  sendToken(from: String! to: String! amount: Int!): Result
+}
+
+###############################################################################
+
+type Result {
+  code: Int!
+  height: Int!
+  rawLog: String!
+  transactionHash: String!
+  gasUsed: Int!
+  gasWanted: Int!
+}
