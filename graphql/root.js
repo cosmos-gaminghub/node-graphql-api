@@ -5,7 +5,8 @@ class Root {
 
   init () {
     const resolver = {
-      sendToken: this.service.sendToken
+      fetchMission: this.service.fetchMission,
+      fetchMissions: this.service.fetchMissions
     }
     return resolver
   }

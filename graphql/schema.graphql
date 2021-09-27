@@ -1,14 +1,11 @@
 type Query {
-  sendToken(from: String! to: String! amount: Int!): Result
+  fetchMission(missionID: Int!): Mission
+  fetchMissions: [Mission]
 }
 
 ###############################################################################
-
-type Result {
-  code: Int!
-  height: Int!
-  rawLog: String!
-  transactionHash: String!
-  gasUsed: Int!
-  gasWanted: Int!
+type Mission {
+	id: Int
+	point: Int
+	detail: String
 }
