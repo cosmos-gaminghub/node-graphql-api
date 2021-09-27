@@ -92,7 +92,18 @@
                     "seqType": "Sequelize.DATE"
                 }
             },
-            "indexes": []
+            "indexes": {
+                "ddd10332c906e8e6215921570e02516f6732cbc3": {
+                    "name": "validator_id_indexes",
+                    "fields": [
+                        "validator_id"
+                    ],
+                    "options": {
+                        "indexName": "validator_id_indexes",
+                        "name": "validator_id_indexes"
+                    }
+                }
+            }
         },
         "txs": {
             "tableName": "txs",
@@ -146,6 +157,26 @@
                         "name": "hash_UNIQUE",
                         "indicesType": "UNIQUE",
                         "type": "UNIQUE"
+                    }
+                },
+                "9aa0761c7c83ac8858d6bfbc385f4768fe833de4": {
+                    "name": "sender_indexes",
+                    "fields": [
+                        "sender"
+                    ],
+                    "options": {
+                        "indexName": "sender_indexes",
+                        "name": "sender_indexes"
+                    }
+                },
+                "3688ade5545d999855a280549679404eb522e332": {
+                    "name": "type_indexes",
+                    "fields": [
+                        "type"
+                    ],
+                    "options": {
+                        "indexName": "type_indexes",
+                        "name": "type_indexes"
                     }
                 }
             }
@@ -205,15 +236,15 @@
                 }
             },
             "indexes": {
-                "1c35c4a34d8b4daef2bed992f8832fc032bf3b6b": {
-                    "name": "hash_UNIQUE",
+                "1a9f9e9ab264cf1a1fd4332f4b03741a5c2ee945": {
+                    "name": "operator_address_UNIQUE",
                     "fields": [
                         "operator_address"
                     ],
                     "unique": true,
                     "options": {
-                        "indexName": "hash_UNIQUE",
-                        "name": "hash_UNIQUE",
+                        "indexName": "operator_address_UNIQUE",
+                        "name": "operator_address_UNIQUE",
                         "indicesType": "UNIQUE",
                         "type": "UNIQUE"
                     }

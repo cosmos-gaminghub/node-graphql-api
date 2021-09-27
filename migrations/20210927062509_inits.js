@@ -9,15 +9,18 @@ const Sequelize = require('sequelize')
  * createTable() => "txs", deps: []
  * createTable() => "tx_types", deps: []
  * createTable() => "validators", deps: []
+ * addIndex(validator_id_indexes) => "point_histories"
  * addIndex(hash_UNIQUE) => "txs"
- * addIndex(hash_UNIQUE) => "validators"
+ * addIndex(sender_indexes) => "txs"
+ * addIndex(type_indexes) => "txs"
+ * addIndex(operator_address_UNIQUE) => "validators"
  *
  */
 
 const info = {
   revision: 1,
   name: 'inits',
-  created: '2021-09-27T06:12:52.624Z',
+  created: '2021-09-27T06:25:09.900Z',
   comment: ''
 }
 
@@ -193,6 +196,18 @@ const migrationCommands = (transaction) => [
   {
     fn: 'addIndex',
     params: [
+      'point_histories',
+      ['validator_id'],
+      {
+        indexName: 'validator_id_indexes',
+        name: 'validator_id_indexes',
+        transaction
+      }
+    ]
+  },
+  {
+    fn: 'addIndex',
+    params: [
       'txs',
       ['hash'],
       {
@@ -207,11 +222,27 @@ const migrationCommands = (transaction) => [
   {
     fn: 'addIndex',
     params: [
+      'txs',
+      ['sender'],
+      { indexName: 'sender_indexes', name: 'sender_indexes', transaction }
+    ]
+  },
+  {
+    fn: 'addIndex',
+    params: [
+      'txs',
+      ['type'],
+      { indexName: 'type_indexes', name: 'type_indexes', transaction }
+    ]
+  },
+  {
+    fn: 'addIndex',
+    params: [
       'validators',
       ['operator_address'],
       {
-        indexName: 'hash_UNIQUE',
-        name: 'hash_UNIQUE',
+        indexName: 'operator_address_UNIQUE',
+        name: 'operator_address_UNIQUE',
         indicesType: 'UNIQUE',
         type: 'UNIQUE',
         transaction
