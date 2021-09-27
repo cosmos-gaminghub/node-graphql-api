@@ -1,0 +1,228 @@
+{
+    "tables": {
+        "addresses": {
+            "tableName": "addresses",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "allowNull": false,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "validator_id": {
+                    "field": "validator_id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "address": {
+                    "field": "address",
+                    "seqType": "Sequelize.STRING(191)"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "missions": {
+            "tableName": "missions",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "allowNull": false,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "point": {
+                    "field": "point",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "detail": {
+                    "field": "detail",
+                    "seqType": "Sequelize.TEXT"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "point_histories": {
+            "tableName": "point_histories",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "allowNull": false,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "validator_id": {
+                    "field": "validator_id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "mission_id": {
+                    "field": "mission_id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "point": {
+                    "field": "point",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "txs": {
+            "tableName": "txs",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "allowNull": false,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "hash": {
+                    "field": "hash",
+                    "seqType": "Sequelize.STRING(191)"
+                },
+                "sender": {
+                    "field": "sender",
+                    "seqType": "Sequelize.STRING(191)"
+                },
+                "type": {
+                    "field": "type",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "detail": {
+                    "field": "detail",
+                    "seqType": "Sequelize.TEXT"
+                },
+                "confirmed_at": {
+                    "field": "confirmed_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": {
+                "510cf91317d9bb00734f8ed2deca8e406ebeb2df": {
+                    "name": "hash_UNIQUE",
+                    "fields": [
+                        "hash"
+                    ],
+                    "unique": true,
+                    "options": {
+                        "indexName": "hash_UNIQUE",
+                        "name": "hash_UNIQUE",
+                        "indicesType": "UNIQUE",
+                        "type": "UNIQUE"
+                    }
+                }
+            }
+        },
+        "tx_types": {
+            "tableName": "tx_types",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "allowNull": false,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "name": {
+                    "field": "name",
+                    "seqType": "Sequelize.STRING(191)"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": []
+        },
+        "validators": {
+            "tableName": "validators",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "allowNull": false,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "operator_address": {
+                    "field": "operator_address",
+                    "seqType": "Sequelize.STRING(191)"
+                },
+                "moniker": {
+                    "field": "moniker",
+                    "seqType": "Sequelize.STRING(191)"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": {
+                "1c35c4a34d8b4daef2bed992f8832fc032bf3b6b": {
+                    "name": "hash_UNIQUE",
+                    "fields": [
+                        "operator_address"
+                    ],
+                    "unique": true,
+                    "options": {
+                        "indexName": "hash_UNIQUE",
+                        "name": "hash_UNIQUE",
+                        "indicesType": "UNIQUE",
+                        "type": "UNIQUE"
+                    }
+                }
+            }
+        }
+    },
+    "path": "/home/eg/node-graphql-api/migrations/_current.json",
+    "backupPath": "/home/eg/node-graphql-api/migrations/_current_bak.json",
+    "exists": false,
+    "revision": 1
+}
