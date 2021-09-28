@@ -8,26 +8,45 @@
 
 const { DataTypes, Model } = require('sequelize')
 
-class Mission extends Model {
+class Block extends Model {
 }
 
 module.exports = (sequelize) => {
-  return Mission.init({
+  return Block.init({
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       allowNull: false
     },
-    point: {
+    chain_id: {
+      type: DataTypes.STRING(191)
+    },
+    height: {
       type: DataTypes.INTEGER
     },
-    detail: {
-      type: DataTypes.TEXT
+    proposer: {
+      type: DataTypes.STRING(191)
+    },
+    block_hash: {
+      type: DataTypes.STRING(191)
+    },
+    num_txs: {
+      type: DataTypes.INTEGER
+    },
+    timestamp: {
+      type: DataTypes.DATE
     }
   }, {
     sequelize: sequelize,
-    modelName: 'Mission',
-    tableName: 'missions',
+    modelName: 'Block',
+    tableName: 'blocks',
+    indexes: [
+      {
+        name: 'height_UNIQUE',
+        fields: ['height'],
+        unique: true
+      }
+    ],
     timestamps: true,
     underscored: true,
     syncOnAssociation: false
