@@ -11,7 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "@cosmjs/proto-signing": "^0.25.6",
-    "@cosmjs/stargate": "^0.25.6",
+    "@cosmjs/stargate": "^0.26.0",
     "@graphql-tools/graphql-file-loader": "^7.1.0",
     "@graphql-tools/load": "^7.3.2",
     "dotenv": "^10.0.0",
