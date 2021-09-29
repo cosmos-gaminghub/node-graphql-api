@@ -5,7 +5,7 @@
             "schema": {
                 "id": {
                     "primaryKey": true,
-                    "allowNull": false,
+                    "autoIncrement": true,
                     "field": "id",
                     "seqType": "Sequelize.INTEGER"
                 },
@@ -30,12 +30,72 @@
             },
             "indexes": []
         },
+        "blocks": {
+            "tableName": "blocks",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "chain_id": {
+                    "field": "chain_id",
+                    "seqType": "Sequelize.STRING(191)"
+                },
+                "height": {
+                    "field": "height",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "proposer": {
+                    "field": "proposer",
+                    "seqType": "Sequelize.STRING(191)"
+                },
+                "block_hash": {
+                    "field": "block_hash",
+                    "seqType": "Sequelize.STRING(191)"
+                },
+                "num_txs": {
+                    "field": "num_txs",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "timestamp": {
+                    "field": "timestamp",
+                    "seqType": "Sequelize.DATE"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": {
+                "e3e2956161d951d539345cc025591ea731764402": {
+                    "name": "height_UNIQUE",
+                    "fields": [
+                        "height"
+                    ],
+                    "unique": true,
+                    "options": {
+                        "indexName": "height_UNIQUE",
+                        "name": "height_UNIQUE",
+                        "indicesType": "UNIQUE",
+                        "type": "UNIQUE"
+                    }
+                }
+            }
+        },
         "missions": {
             "tableName": "missions",
             "schema": {
                 "id": {
                     "primaryKey": true,
-                    "allowNull": false,
+                    "autoIncrement": true,
                     "field": "id",
                     "seqType": "Sequelize.INTEGER"
                 },
@@ -65,7 +125,7 @@
             "schema": {
                 "id": {
                     "primaryKey": true,
-                    "allowNull": false,
+                    "autoIncrement": true,
                     "field": "id",
                     "seqType": "Sequelize.INTEGER"
                 },
@@ -110,7 +170,7 @@
             "schema": {
                 "id": {
                     "primaryKey": true,
-                    "allowNull": false,
+                    "autoIncrement": true,
                     "field": "id",
                     "seqType": "Sequelize.INTEGER"
                 },
@@ -186,7 +246,7 @@
             "schema": {
                 "id": {
                     "primaryKey": true,
-                    "allowNull": false,
+                    "autoIncrement": true,
                     "field": "id",
                     "seqType": "Sequelize.INTEGER"
                 },
@@ -212,7 +272,7 @@
             "schema": {
                 "id": {
                     "primaryKey": true,
-                    "allowNull": false,
+                    "autoIncrement": true,
                     "field": "id",
                     "seqType": "Sequelize.INTEGER"
                 },
