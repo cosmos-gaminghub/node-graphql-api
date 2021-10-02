@@ -1,6 +1,7 @@
 type Query {
   fetchMission(missionID: Int!): Mission
   fetchMissions: [Mission]
+  fetchTxCount(sender: String!): TxCount
 }
 
 ###############################################################################
@@ -8,4 +9,8 @@ type Mission {
 	id: Int
 	point: Int
 	detail: String
+}
+
+type TxCount {
+  total_txs: Int
 }

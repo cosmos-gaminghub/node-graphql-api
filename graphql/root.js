@@ -6,7 +6,8 @@ class Root {
   init () {
     const resolver = {
       fetchMission: this.service.fetchMission,
-      fetchMissions: this.service.fetchMissions
+      fetchMissions: this.service.fetchMissions,
+      fetchTxCount: this.service.fetchTxCount
     }
     return resolver
   }
