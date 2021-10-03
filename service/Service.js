@@ -1,4 +1,4 @@
-const { sequelize, Mission } = require('../models')
+const { sequelize, Mission, Validator } = require('../models')
 const { QueryTypes } = require('sequelize')
 
 class Service {
@@ -22,6 +22,12 @@ class Service {
     )
     // response format: { total_txs: 2 }
     return results[0]
+  }
+
+  async fetchValidators () {
+    const validators = await Validator.findAll()
+    console.log(validators)
+    return validators
   }
 }
 
