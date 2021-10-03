@@ -6,7 +6,8 @@
     "test": "export NODE_ENV=test; npm run db:drop; npm run db:setup; jest;",
     "db:setup": "sequelize-cli db:migrate; sequelize-cli db:seed:all",
     "db:drop": "rm storage/*.sqlite3",
-    "dev": " nodemon graphql/index.js"
+    "dev": " nodemon graphql/index.js",
+    "lint": " eslint ."
   },
   "license": "MIT",
   "dependencies": {
