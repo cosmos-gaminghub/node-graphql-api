@@ -1,35 +1,5 @@
 {
     "tables": {
-        "addresses": {
-            "tableName": "addresses",
-            "schema": {
-                "id": {
-                    "primaryKey": true,
-                    "autoIncrement": true,
-                    "field": "id",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "validator_id": {
-                    "field": "validator_id",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "address": {
-                    "field": "address",
-                    "seqType": "Sequelize.STRING(191)"
-                },
-                "createdAt": {
-                    "allowNull": false,
-                    "field": "created_at",
-                    "seqType": "Sequelize.DATE"
-                },
-                "updatedAt": {
-                    "allowNull": false,
-                    "field": "updated_at",
-                    "seqType": "Sequelize.DATE"
-                }
-            },
-            "indexes": []
-        },
         "blocks": {
             "tableName": "blocks",
             "schema": {
@@ -38,10 +8,6 @@
                     "autoIncrement": true,
                     "field": "id",
                     "seqType": "Sequelize.INTEGER"
-                },
-                "chain_id": {
-                    "field": "chain_id",
-                    "seqType": "Sequelize.STRING(191)"
                 },
                 "height": {
                     "field": "height",
@@ -99,13 +65,17 @@
                     "field": "id",
                     "seqType": "Sequelize.INTEGER"
                 },
-                "point": {
-                    "field": "point",
-                    "seqType": "Sequelize.INTEGER"
+                "name": {
+                    "field": "name",
+                    "seqType": "Sequelize.STRING(191)"
                 },
                 "detail": {
                     "field": "detail",
-                    "seqType": "Sequelize.TEXT"
+                    "seqType": "Sequelize.STRING(191)"
+                },
+                "point": {
+                    "field": "point",
+                    "seqType": "Sequelize.INTEGER"
                 },
                 "createdAt": {
                     "allowNull": false,
@@ -162,6 +132,20 @@
                         "indexName": "validator_id_indexes",
                         "name": "validator_id_indexes"
                     }
+                },
+                "960317d49d5428e005ae156002a0778ea01cc245": {
+                    "name": "validator_id_mission_id_unique",
+                    "fields": [
+                        "validator_id",
+                        "mission_id"
+                    ],
+                    "unique": true,
+                    "options": {
+                        "indexName": "validator_id_mission_id_unique",
+                        "name": "validator_id_mission_id_unique",
+                        "indicesType": "UNIQUE",
+                        "type": "UNIQUE"
+                    }
                 }
             }
         },
@@ -182,9 +166,9 @@
                     "field": "sender",
                     "seqType": "Sequelize.STRING(191)"
                 },
-                "type": {
-                    "field": "type",
-                    "seqType": "Sequelize.INTEGER"
+                "action": {
+                    "field": "action",
+                    "seqType": "Sequelize.STRING(191)"
                 },
                 "detail": {
                     "field": "detail",
@@ -229,43 +213,17 @@
                         "name": "sender_indexes"
                     }
                 },
-                "3688ade5545d999855a280549679404eb522e332": {
-                    "name": "type_indexes",
+                "af9efa4d1fb4b99cd80e01abf4ecdc7c1f912648": {
+                    "name": "action_indexes",
                     "fields": [
-                        "type"
+                        "action"
                     ],
                     "options": {
-                        "indexName": "type_indexes",
-                        "name": "type_indexes"
+                        "indexName": "action_indexes",
+                        "name": "action_indexes"
                     }
                 }
             }
-        },
-        "tx_types": {
-            "tableName": "tx_types",
-            "schema": {
-                "id": {
-                    "primaryKey": true,
-                    "autoIncrement": true,
-                    "field": "id",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "name": {
-                    "field": "name",
-                    "seqType": "Sequelize.STRING(191)"
-                },
-                "createdAt": {
-                    "allowNull": false,
-                    "field": "created_at",
-                    "seqType": "Sequelize.DATE"
-                },
-                "updatedAt": {
-                    "allowNull": false,
-                    "field": "updated_at",
-                    "seqType": "Sequelize.DATE"
-                }
-            },
-            "indexes": []
         },
         "validators": {
             "tableName": "validators",
@@ -282,6 +240,10 @@
                 },
                 "moniker": {
                     "field": "moniker",
+                    "seqType": "Sequelize.STRING(191)"
+                },
+                "address": {
+                    "field": "address",
                     "seqType": "Sequelize.STRING(191)"
                 },
                 "createdAt": {

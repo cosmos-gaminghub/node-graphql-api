@@ -14,7 +14,7 @@ module.exports = {
      * }], {});
     */
     await queryInterface.bulkInsert('blocks', wrap([
-      { chain_id: 'cosmoshub-4', height: 6910000 }
+      { height: 6910000 }
     ]), {})
   },
 
