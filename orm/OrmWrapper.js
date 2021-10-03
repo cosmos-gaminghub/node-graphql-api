@@ -8,9 +8,8 @@ class OrmWrapper {
       .catch(error => console.log(error))
   }
 
-  async saveBlock (chainId, height, blockHash, numTxs, timestamp) {
+  async saveBlock (height, blockHash, numTxs, timestamp) {
     return await Block.create({
-      chain_id: chainId,
       height: height,
       block_hash: blockHash,
       num_txs: numTxs,
@@ -19,11 +18,11 @@ class OrmWrapper {
       .catch(error => console.log(error))
   }
 
-  async saveTx (hash, sender, type, detail, confirmedAt) {
+  async saveTx (hash, sender, action, detail, confirmedAt) {
     return await Tx.create({
       hash: hash,
       sender: sender,
-      type: type,
+      action: action,
       detail: detail,
       confirmed_at: confirmedAt
     })

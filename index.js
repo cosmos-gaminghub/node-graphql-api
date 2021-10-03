@@ -35,7 +35,6 @@ async function process (height) {
 
   const orm = new WrapperOrm()
   orm.saveBlock(
-    block.header.chainId,
     block.header.height,
     block.id,
     block.txs.length,
