@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const wrap = require('../db/utils/wrapValuesWithDateTime.js')
 

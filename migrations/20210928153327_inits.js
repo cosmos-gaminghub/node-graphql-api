@@ -1,4 +1,4 @@
-const Sequelize = require("sequelize");
+const Sequelize = require('sequelize')
 
 /**
  * Actions summary:
@@ -21,336 +21,336 @@ const Sequelize = require("sequelize");
 
 const info = {
   revision: 1,
-  name: "inits",
-  created: "2021-09-28T15:33:27.541Z",
-  comment: "",
-};
+  name: 'inits',
+  created: '2021-09-28T15:33:27.541Z',
+  comment: ''
+}
 
 const migrationCommands = (transaction) => [
   {
-    fn: "createTable",
+    fn: 'createTable',
     params: [
-      "addresses",
+      'addresses',
       {
         id: {
           type: Sequelize.INTEGER,
-          field: "id",
+          field: 'id',
           autoIncrement: true,
-          primaryKey: true,
+          primaryKey: true
         },
-        validator_id: { type: Sequelize.INTEGER, field: "validator_id" },
-        address: { type: Sequelize.STRING(191), field: "address" },
+        validator_id: { type: Sequelize.INTEGER, field: 'validator_id' },
+        address: { type: Sequelize.STRING(191), field: 'address' },
         createdAt: {
           type: Sequelize.DATE,
-          field: "created_at",
-          allowNull: false,
+          field: 'created_at',
+          allowNull: false
         },
         updatedAt: {
           type: Sequelize.DATE,
-          field: "updated_at",
-          allowNull: false,
-        },
+          field: 'updated_at',
+          allowNull: false
+        }
       },
-      { transaction },
-    ],
+      { transaction }
+    ]
   },
   {
-    fn: "createTable",
+    fn: 'createTable',
     params: [
-      "blocks",
+      'blocks',
       {
         id: {
           type: Sequelize.INTEGER,
-          field: "id",
+          field: 'id',
           autoIncrement: true,
-          primaryKey: true,
+          primaryKey: true
         },
-        chain_id: { type: Sequelize.STRING(191), field: "chain_id" },
-        height: { type: Sequelize.INTEGER, field: "height" },
-        proposer: { type: Sequelize.STRING(191), field: "proposer" },
-        block_hash: { type: Sequelize.STRING(191), field: "block_hash" },
-        num_txs: { type: Sequelize.INTEGER, field: "num_txs" },
-        timestamp: { type: Sequelize.DATE, field: "timestamp" },
+        chain_id: { type: Sequelize.STRING(191), field: 'chain_id' },
+        height: { type: Sequelize.INTEGER, field: 'height' },
+        proposer: { type: Sequelize.STRING(191), field: 'proposer' },
+        block_hash: { type: Sequelize.STRING(191), field: 'block_hash' },
+        num_txs: { type: Sequelize.INTEGER, field: 'num_txs' },
+        timestamp: { type: Sequelize.DATE, field: 'timestamp' },
         createdAt: {
           type: Sequelize.DATE,
-          field: "created_at",
-          allowNull: false,
+          field: 'created_at',
+          allowNull: false
         },
         updatedAt: {
           type: Sequelize.DATE,
-          field: "updated_at",
-          allowNull: false,
-        },
+          field: 'updated_at',
+          allowNull: false
+        }
       },
-      { transaction },
-    ],
+      { transaction }
+    ]
   },
   {
-    fn: "createTable",
+    fn: 'createTable',
     params: [
-      "missions",
+      'missions',
       {
         id: {
           type: Sequelize.INTEGER,
-          field: "id",
+          field: 'id',
           autoIncrement: true,
-          primaryKey: true,
+          primaryKey: true
         },
-        point: { type: Sequelize.INTEGER, field: "point" },
-        detail: { type: Sequelize.TEXT, field: "detail" },
+        point: { type: Sequelize.INTEGER, field: 'point' },
+        detail: { type: Sequelize.TEXT, field: 'detail' },
         createdAt: {
           type: Sequelize.DATE,
-          field: "created_at",
-          allowNull: false,
+          field: 'created_at',
+          allowNull: false
         },
         updatedAt: {
           type: Sequelize.DATE,
-          field: "updated_at",
-          allowNull: false,
-        },
+          field: 'updated_at',
+          allowNull: false
+        }
       },
-      { transaction },
-    ],
+      { transaction }
+    ]
   },
   {
-    fn: "createTable",
+    fn: 'createTable',
     params: [
-      "point_histories",
+      'point_histories',
       {
         id: {
           type: Sequelize.INTEGER,
-          field: "id",
+          field: 'id',
           autoIncrement: true,
-          primaryKey: true,
+          primaryKey: true
         },
-        validator_id: { type: Sequelize.INTEGER, field: "validator_id" },
-        mission_id: { type: Sequelize.INTEGER, field: "mission_id" },
-        point: { type: Sequelize.INTEGER, field: "point" },
+        validator_id: { type: Sequelize.INTEGER, field: 'validator_id' },
+        mission_id: { type: Sequelize.INTEGER, field: 'mission_id' },
+        point: { type: Sequelize.INTEGER, field: 'point' },
         createdAt: {
           type: Sequelize.DATE,
-          field: "created_at",
-          allowNull: false,
+          field: 'created_at',
+          allowNull: false
         },
         updatedAt: {
           type: Sequelize.DATE,
-          field: "updated_at",
-          allowNull: false,
-        },
+          field: 'updated_at',
+          allowNull: false
+        }
       },
-      { transaction },
-    ],
+      { transaction }
+    ]
   },
   {
-    fn: "createTable",
+    fn: 'createTable',
     params: [
-      "txs",
+      'txs',
       {
         id: {
           type: Sequelize.INTEGER,
-          field: "id",
+          field: 'id',
           autoIncrement: true,
-          primaryKey: true,
+          primaryKey: true
         },
-        hash: { type: Sequelize.STRING(191), field: "hash" },
-        sender: { type: Sequelize.STRING(191), field: "sender" },
-        type: { type: Sequelize.INTEGER, field: "type" },
-        detail: { type: Sequelize.TEXT, field: "detail" },
-        confirmed_at: { type: Sequelize.DATE, field: "confirmed_at" },
+        hash: { type: Sequelize.STRING(191), field: 'hash' },
+        sender: { type: Sequelize.STRING(191), field: 'sender' },
+        type: { type: Sequelize.INTEGER, field: 'type' },
+        detail: { type: Sequelize.TEXT, field: 'detail' },
+        confirmed_at: { type: Sequelize.DATE, field: 'confirmed_at' },
         createdAt: {
           type: Sequelize.DATE,
-          field: "created_at",
-          allowNull: false,
+          field: 'created_at',
+          allowNull: false
         },
         updatedAt: {
           type: Sequelize.DATE,
-          field: "updated_at",
-          allowNull: false,
-        },
+          field: 'updated_at',
+          allowNull: false
+        }
       },
-      { transaction },
-    ],
+      { transaction }
+    ]
   },
   {
-    fn: "createTable",
+    fn: 'createTable',
     params: [
-      "tx_types",
+      'tx_types',
       {
         id: {
           type: Sequelize.INTEGER,
-          field: "id",
+          field: 'id',
           autoIncrement: true,
-          primaryKey: true,
+          primaryKey: true
         },
-        name: { type: Sequelize.STRING(191), field: "name" },
+        name: { type: Sequelize.STRING(191), field: 'name' },
         createdAt: {
           type: Sequelize.DATE,
-          field: "created_at",
-          allowNull: false,
+          field: 'created_at',
+          allowNull: false
         },
         updatedAt: {
           type: Sequelize.DATE,
-          field: "updated_at",
-          allowNull: false,
-        },
+          field: 'updated_at',
+          allowNull: false
+        }
       },
-      { transaction },
-    ],
+      { transaction }
+    ]
   },
   {
-    fn: "createTable",
+    fn: 'createTable',
     params: [
-      "validators",
+      'validators',
       {
         id: {
           type: Sequelize.INTEGER,
-          field: "id",
+          field: 'id',
           autoIncrement: true,
-          primaryKey: true,
+          primaryKey: true
         },
         operator_address: {
           type: Sequelize.STRING(191),
-          field: "operator_address",
+          field: 'operator_address'
         },
-        moniker: { type: Sequelize.STRING(191), field: "moniker" },
+        moniker: { type: Sequelize.STRING(191), field: 'moniker' },
         createdAt: {
           type: Sequelize.DATE,
-          field: "created_at",
-          allowNull: false,
+          field: 'created_at',
+          allowNull: false
         },
         updatedAt: {
           type: Sequelize.DATE,
-          field: "updated_at",
-          allowNull: false,
-        },
+          field: 'updated_at',
+          allowNull: false
+        }
       },
-      { transaction },
-    ],
+      { transaction }
+    ]
   },
   {
-    fn: "addIndex",
+    fn: 'addIndex',
     params: [
-      "blocks",
-      ["height"],
+      'blocks',
+      ['height'],
       {
-        indexName: "height_UNIQUE",
-        name: "height_UNIQUE",
-        indicesType: "UNIQUE",
-        type: "UNIQUE",
-        transaction,
-      },
-    ],
+        indexName: 'height_UNIQUE',
+        name: 'height_UNIQUE',
+        indicesType: 'UNIQUE',
+        type: 'UNIQUE',
+        transaction
+      }
+    ]
   },
   {
-    fn: "addIndex",
+    fn: 'addIndex',
     params: [
-      "point_histories",
-      ["validator_id"],
+      'point_histories',
+      ['validator_id'],
       {
-        indexName: "validator_id_indexes",
-        name: "validator_id_indexes",
-        transaction,
-      },
-    ],
+        indexName: 'validator_id_indexes',
+        name: 'validator_id_indexes',
+        transaction
+      }
+    ]
   },
   {
-    fn: "addIndex",
+    fn: 'addIndex',
     params: [
-      "txs",
-      ["hash"],
+      'txs',
+      ['hash'],
       {
-        indexName: "hash_UNIQUE",
-        name: "hash_UNIQUE",
-        indicesType: "UNIQUE",
-        type: "UNIQUE",
-        transaction,
-      },
-    ],
+        indexName: 'hash_UNIQUE',
+        name: 'hash_UNIQUE',
+        indicesType: 'UNIQUE',
+        type: 'UNIQUE',
+        transaction
+      }
+    ]
   },
   {
-    fn: "addIndex",
+    fn: 'addIndex',
     params: [
-      "txs",
-      ["sender"],
-      { indexName: "sender_indexes", name: "sender_indexes", transaction },
-    ],
+      'txs',
+      ['sender'],
+      { indexName: 'sender_indexes', name: 'sender_indexes', transaction }
+    ]
   },
   {
-    fn: "addIndex",
+    fn: 'addIndex',
     params: [
-      "txs",
-      ["type"],
-      { indexName: "type_indexes", name: "type_indexes", transaction },
-    ],
+      'txs',
+      ['type'],
+      { indexName: 'type_indexes', name: 'type_indexes', transaction }
+    ]
   },
   {
-    fn: "addIndex",
+    fn: 'addIndex',
     params: [
-      "validators",
-      ["operator_address"],
+      'validators',
+      ['operator_address'],
       {
-        indexName: "operator_address_UNIQUE",
-        name: "operator_address_UNIQUE",
-        indicesType: "UNIQUE",
-        type: "UNIQUE",
-        transaction,
-      },
-    ],
-  },
-];
+        indexName: 'operator_address_UNIQUE',
+        name: 'operator_address_UNIQUE',
+        indicesType: 'UNIQUE',
+        type: 'UNIQUE',
+        transaction
+      }
+    ]
+  }
+]
 
 const rollbackCommands = (transaction) => [
   {
-    fn: "dropTable",
-    params: ["addresses", { transaction }],
+    fn: 'dropTable',
+    params: ['addresses', { transaction }]
   },
   {
-    fn: "dropTable",
-    params: ["blocks", { transaction }],
+    fn: 'dropTable',
+    params: ['blocks', { transaction }]
   },
   {
-    fn: "dropTable",
-    params: ["missions", { transaction }],
+    fn: 'dropTable',
+    params: ['missions', { transaction }]
   },
   {
-    fn: "dropTable",
-    params: ["point_histories", { transaction }],
+    fn: 'dropTable',
+    params: ['point_histories', { transaction }]
   },
   {
-    fn: "dropTable",
-    params: ["txs", { transaction }],
+    fn: 'dropTable',
+    params: ['txs', { transaction }]
   },
   {
-    fn: "dropTable",
-    params: ["tx_types", { transaction }],
+    fn: 'dropTable',
+    params: ['tx_types', { transaction }]
   },
   {
-    fn: "dropTable",
-    params: ["validators", { transaction }],
-  },
-];
+    fn: 'dropTable',
+    params: ['validators', { transaction }]
+  }
+]
 
-const pos = 0;
-const useTransaction = true;
+const pos = 0
+const useTransaction = true
 
 const execute = (queryInterface, sequelize, _commands) => {
-  let index = pos;
+  let index = pos
   const run = (transaction) => {
-    const commands = _commands(transaction);
+    const commands = _commands(transaction)
     return new Promise((resolve, reject) => {
       const next = () => {
         if (index < commands.length) {
-          const command = commands[index];
-          console.log(`[#${index}] execute: ${command.fn}`);
-          index++;
-          queryInterface[command.fn](...command.params).then(next, reject);
-        } else resolve();
-      };
-      next();
-    });
-  };
-  if (useTransaction) return queryInterface.sequelize.transaction(run);
-  return run(null);
-};
+          const command = commands[index]
+          console.log(`[#${index}] execute: ${command.fn}`)
+          index++
+          queryInterface[command.fn](...command.params).then(next, reject)
+        } else resolve()
+      }
+      next()
+    })
+  }
+  if (useTransaction) return queryInterface.sequelize.transaction(run)
+  return run(null)
+}
 
 module.exports = {
   pos,
@@ -359,5 +359,5 @@ module.exports = {
     execute(queryInterface, sequelize, migrationCommands),
   down: (queryInterface, sequelize) =>
     execute(queryInterface, sequelize, rollbackCommands),
-  info,
-};
+  info
+}
