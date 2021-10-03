@@ -1,9 +1,8 @@
-const { Mission } = require('../models')
-const { sequelize } = require('../models')
+const { sequelize, Mission } = require('../models')
 const { QueryTypes } = require('sequelize')
 
 class Service {
-  async fetchMissions (args) {
+  async fetchMissions () {
     const missions = await Mission.findAll()
     return missions
   }
