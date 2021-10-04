@@ -8,3 +8,16 @@ describe('Validators Model', () => {
     expect(validators.length).toBe(10)
   })
 })
+
+describe('Validators Model', () => {
+  test('Check validators columns', async () => {
+    const q = { validatorID: 1 }
+    const validator = await service.fetchValidator(q)
+    console.log(validator)
+
+    const columns = Object.keys(validator.rawAttributes)
+    expect(columns.indexOf('operator_address')).toBe(1)
+    expect(columns.indexOf('moniker')).toBe(2)
+    expect(columns.indexOf('address')).toBe(3)
+  })
+})
