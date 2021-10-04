@@ -107,10 +107,6 @@
                     "field": "mission_id",
                     "seqType": "Sequelize.INTEGER"
                 },
-                "point": {
-                    "field": "point",
-                    "seqType": "Sequelize.INTEGER"
-                },
                 "createdAt": {
                     "allowNull": false,
                     "field": "created_at",
