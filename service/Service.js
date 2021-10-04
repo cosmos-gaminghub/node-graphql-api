@@ -37,6 +37,18 @@ class Service {
     // response format: { total_txs: 2 }
     return result
   }
+
+  async fetchMissionResult (args) {
+    const result = await sequelize.query(
+      'SELECT * FROM missions WHERE id in (SELECT mission_id FROM point_histories WHERE validator_id = ?)',
+      {
+        replacements: [args.validatorID],
+        type: QueryTypes.SELECT
+      }
+    )
+    // response format: [Mission]
+    return result
+  }
 }
 
 module.exports = Service

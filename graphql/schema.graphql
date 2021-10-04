@@ -4,6 +4,7 @@ type Query {
   fetchValidators: [Validator]
   fetchValidator(validatorID: Int): Validator
   fetchTxCount(validatorID: Int): TxCount
+  fetchMissionResult(validatorID: Int): [Mission]
 }
 
 ###############################################################################
@@ -25,4 +26,3 @@ type Validator {
 type TxCount {
   total_txs: Int
 }
-
