@@ -10,7 +10,8 @@ class Root {
       fetchValidator: this.service.fetchValidator,
       fetchValidators: this.service.fetchValidators,
       fetchTxCount: this.service.fetchTxCount,
-      fetchMissionResult: this.service.fetchMissionResult
+      fetchMissionResult: this.service.fetchMissionResult,
+      fetchMyPoint: this.service.fetchMyPoint
     }
     return resolver
   }

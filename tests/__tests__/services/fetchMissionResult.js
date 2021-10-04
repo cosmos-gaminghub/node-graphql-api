@@ -9,3 +9,11 @@ describe('Mission Histories', () => {
     expect(completedMissions.length).toBe(3)
   })
 })
+
+describe('Mission Histories', () => {
+  test('Total of point is 30', async () => {
+    const q = { validatorID: 1 }
+    const res = await service.fetchMyPoint(q)
+    expect(res.total_point).toBe(30)
+  })
+})

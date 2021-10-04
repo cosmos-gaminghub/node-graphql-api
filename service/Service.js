@@ -49,6 +49,18 @@ class Service {
     // response format: [Mission]
     return result
   }
+
+  async fetchMyPoint (args) {
+    const result = await sequelize.query(
+      'SELECT sum(point) as total_point FROM missions WHERE id in (SELECT mission_id FROM point_histories WHERE validator_id = ?)',
+      {
+        replacements: [args.validatorID],
+        type: QueryTypes.SELECT
+      }
+    )
+    // response format: [MyPoint]
+    return result[0]
+  }
 }
 
 module.exports = Service
