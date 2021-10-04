@@ -7,8 +7,9 @@ class Root {
     const resolver = {
       fetchMission: this.service.fetchMission,
       fetchMissions: this.service.fetchMissions,
-      fetchTxCount: this.service.fetchTxCount,
-      fetchValidators: this.service.fetchValidators
+      fetchValidator: this.service.fetchValidator,
+      fetchValidators: this.service.fetchValidators,
+      fetchTxCount: this.service.fetchTxCount
     }
     return resolver
   }

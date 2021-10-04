@@ -1,23 +1,28 @@
 type Query {
-  fetchMission(missionID: Int!): Mission
   fetchMissions: [Mission]
-  fetchTxCount(sender: String!): TxCount
+  fetchMission(missionID: Int!): Mission
   fetchValidators: [Validator]
+  fetchValidator(validatorID: Int): Validator
+  fetchTxCount(validatorID: Int): TxCount
 }
 
 ###############################################################################
 
 type Mission {
 	id: Int
-	point: Int
+  name: String
 	detail: String
+	point: Int
+  isCompleted: Boolean
+}
+
+type Validator {
+  moniker: String
+  operator_address: String
+  address: String
 }
 
 type TxCount {
   total_txs: Int
 }
 
-type Validator {
-  operator_address: String
-  moniker: String
-}

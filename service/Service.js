@@ -8,26 +8,34 @@ class Service {
   }
 
   async fetchMission (args) {
-    const mission = await Mission.findOne({ where: { id: args.missionID } })
-    return mission
-  }
-
-  async fetchTxCount (args) {
-    const results = await sequelize.query(
-      'SELECT COUNT(*) as total_txs FROM `TXS` WHERE SENDER = ?',
-      {
-        replacements: [args.sender],
-        type: QueryTypes.SELECT
-      }
+    const mission = await Mission.findOne(
+      { where: { id: args.missionID } }
     )
-    // response format: { total_txs: 2 }
-    return results[0]
+    return mission
   }
 
   async fetchValidators () {
     const validators = await Validator.findAll()
-    console.log(validators)
     return validators
+  }
+
+  async fetchValidator (args) {
+    const validator = await Validator.findOne(
+      { where: { id: args.validatorID } }
+    )
+    return validator
+  }
+
+  async fetchTxCount (args) {
+    const result = await sequelize.query(
+      'SELECT COUNT(*) as total_txs FROM `TXS` WHERE ( SELECT address FROM `validators` WHERE id = ?)',
+      {
+        replacements: [args.validatorID],
+        type: QueryTypes.SELECT
+      }
+    )
+    // response format: { total_txs: 2 }
+    return result
   }
 }
 
