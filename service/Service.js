@@ -1,5 +1,6 @@
 const { sequelize, Mission, Validator } = require('../models')
 const { QueryTypes } = require('sequelize')
+const ValidatorResponse = require('./types/validatorResponse')
 
 class Service {
   async fetchMissions () {
@@ -23,12 +24,37 @@ class Service {
     const validator = await Validator.findOne(
       { where: { id: args.validatorID } }
     )
-    return validator
+    // get total_txs data
+    const txResult = await sequelize.query(
+      'SELECT COUNT(*) as totalTxs FROM `TXS` WHERE ( SELECT address FROM `validators` WHERE id = ?)',
+      {
+        replacements: [args.validatorID],
+        type: QueryTypes.SELECT
+      }
+    )
+
+    // get mission clear point data
+    const pointResult = await sequelize.query(
+      'SELECT sum(point) as totalPoints FROM missions WHERE id in (SELECT mission_id FROM point_histories WHERE validator_id = ?)',
+      {
+        replacements: [args.validatorID],
+        type: QueryTypes.SELECT
+      }
+    )
+
+    const res = new ValidatorResponse()
+      .setOperatorAddress(validator.operator_address)
+      .setAddress(validator.address)
+      .setMoniker(validator.moniker)
+      .setTotalTxs(txResult[0].totalTxs)
+      .setTotalPoints(pointResult[0].totalPoints)
+
+    return res
   }
 
   async fetchTxCount (args) {
     const result = await sequelize.query(
-      'SELECT COUNT(*) as total_txs FROM `TXS` WHERE ( SELECT address FROM `validators` WHERE id = ?)',
+      'SELECT COUNT(*) as totalTxs FROM `TXS` WHERE ( SELECT address FROM `validators` WHERE id = ?)',
       {
         replacements: [args.validatorID],
         type: QueryTypes.SELECT
@@ -52,7 +78,7 @@ class Service {
 
   async fetchMyPoint (args) {
     const result = await sequelize.query(
-      'SELECT sum(point) as total_point FROM missions WHERE id in (SELECT mission_id FROM point_histories WHERE validator_id = ?)',
+      'SELECT sum(point) as totalPoints FROM missions WHERE id in (SELECT mission_id FROM point_histories WHERE validator_id = ?)',
       {
         replacements: [args.validatorID],
         type: QueryTypes.SELECT
