@@ -1,5 +1,6 @@
 const express = require('express')
 const { graphqlHTTP } = require('express-graphql')
+const cors = require('cors')
 
 // database
 const schema = require('./schema')
@@ -17,4 +18,5 @@ app.use('/graphql',
   })
 )
 
+app.use(cors())
 app.listen(4000, () => console.log('Express GraphQL Server Now Running On localhost:4000/graphql'))
