@@ -19,6 +19,7 @@ type Mission {
 }
 
 type Validator {
+  id: Int
   moniker: String
   operator_address: String
   address: String

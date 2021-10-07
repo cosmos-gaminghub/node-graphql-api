@@ -42,7 +42,7 @@ class Service {
       }
     )
 
-    const res = new ValidatorResponse()
+    const res = new ValidatorResponse(args.validatorID)
       .setOperatorAddress(validator.operator_address)
       .setAddress(validator.address)
       .setMoniker(validator.moniker)

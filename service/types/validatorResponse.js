@@ -1,4 +1,8 @@
 class ValidatorResponse {
+  constructor (id) {
+    this.id = id
+  }
+
   setMoniker (a) {
     this.moniker = a
     return this
