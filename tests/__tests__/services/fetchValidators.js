@@ -12,11 +12,11 @@ describe('Validators Model', () => {
 describe('Validators Model', () => {
   test('Check validators columns', async () => {
     const q = { validatorID: 1 }
-    const validator = await service.fetchValidator(q)
+    const res = await service.fetchValidator(q)
 
-    const columns = Object.keys(validator.rawAttributes)
-    expect(columns.indexOf('operator_address')).toBe(1)
-    expect(columns.indexOf('moniker')).toBe(2)
-    expect(columns.indexOf('address')).toBe(3)
+    expect(res.operator_address).toBe('cosmosvaloper156gqf9837u7d4c4678yt3rl4ls9c5vuursrrzf')
+    expect(res.moniker).toBe('Binance Staking')
+    expect(res.address).toBe('cosmos156gqf9837u7d4c4678yt3rl4ls9c5vuuxyhkw6')
+    expect(res.totalPoints).toBe(30)
   })
 })

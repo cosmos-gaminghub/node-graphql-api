@@ -1,5 +1,6 @@
 const express = require('express')
 const { graphqlHTTP } = require('express-graphql')
+const cors = require('cors')
 
 // database
 const schema = require('./schema')
@@ -9,6 +10,11 @@ const resolver = new Root(new Service()).init()
 
 // Create an express server and a GraphQL endpoint
 const app = express()
+const corsOpts = {
+  origin: '*'
+}
+
+app.use(cors(corsOpts))
 app.use('/graphql',
   graphqlHTTP({
     schema: schema,

@@ -14,6 +14,6 @@ describe('Mission Histories', () => {
   test('Total of point is 30', async () => {
     const q = { validatorID: 1 }
     const res = await service.fetchMyPoint(q)
-    expect(res.total_point).toBe(30)
+    expect(res.totalPoints).toBe(30)
   })
 })

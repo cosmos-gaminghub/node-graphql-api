@@ -22,6 +22,8 @@ type Validator {
   moniker: String
   operator_address: String
   address: String
+  totalTxs: Int
+  totalPoints: Int
 }
 
 type TxCount {
