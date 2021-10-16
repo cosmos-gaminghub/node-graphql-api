@@ -1,4 +1,4 @@
-const { Tx, Block, MissedBlock } = require('../models')
+const { Tx, Block, MissedBlock, SlashEvent } = require('../models')
 
 class OrmWrapper {
   async getLatestBlockFromDB () {
@@ -11,8 +11,8 @@ class OrmWrapper {
   async saveBlock (height, blockHash, numTxs, timestamp) {
     return await Block.create({
       height: height,
-      block_hash: blockHash,
-      num_txs: numTxs,
+      blockHash: blockHash,
+      numTxs: numTxs,
       timestamp: timestamp
     })
       .catch(error => console.log(error))
@@ -24,15 +24,24 @@ class OrmWrapper {
       sender: sender,
       action: action,
       detail: detail,
-      confirmed_at: confirmedAt
+      confirmedAt: confirmedAt
     })
       .catch(error => console.log(error))
   }
 
-  async saveMissedBlock (height, operatorAddress) {
+  async saveMissedBlock (height, consensusAddress) {
     return await MissedBlock.create({
       height: height,
-      operatorAddress: operatorAddress
+      consensusAddress: consensusAddress
+    })
+      .catch(error => console.log(error))
+  }
+
+  async saveSlashEvent (height, consensusAddress, reason) {
+    return await SlashEvent.create({
+      height: height,
+      consensusAddress: consensusAddress,
+      reason: reason
     })
       .catch(error => console.log(error))
   }
