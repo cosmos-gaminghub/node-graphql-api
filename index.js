@@ -1,4 +1,5 @@
 const { StargateClient, logs } = require('@cosmjs/stargate')
+const sleep = require('./sleep')
 
 // const url = 'http://167.179.104.210:1317'
 const RPCUrl = 'http://198.13.33.206:26657'
@@ -6,32 +7,64 @@ const RPCUrl = 'http://198.13.33.206:26657'
 
 const WrapperOrm = require('./orm/OrmWrapper')
 
-async function main () {
+const main = async () => {
   console.log('Starting Chain Exporter...')
 
-  getandSaveBlock()
+  while (true) {
+    try {
+      console.log('start - sync blockchain')
+      await sync()
+      console.log('finish - sync blockchain')
+    } catch (e) {
+      console.error('error - sync blockchain: ', e)
+    }
+    console.log('sleeping...')
+    await sleep(3000)
+  }
 }
 
 main()
 
-async function getandSaveBlock () {
+async function sync () {
   const orm = new WrapperOrm()
   const blockInDB = await orm.getLatestBlockFromDB()
   const blockInDBHeight = blockInDB.height
 
   const client = await StargateClient.connect(RPCUrl)
-  const block = await client.getBlock()
+
+  let block
+
+  try {
+    block = await client.getBlock()
+  } catch (e) {
+    throw new Error('Not found block from lcd: ', e)
+  }
+
   const latestBlockHeight = block.header.height
 
   for (let i = blockInDBHeight + 1; i < latestBlockHeight; i++) {
-    await process(i)
+    try {
+      console.log('start - process')
+      await process(i)
+      console.log('finish- process')
+    } catch (e) {
+      console.error('process err: ', e)
+      throw new Error('process error: : ', e)
+    }
     console.log('synced block: ', i)
   }
 }
 
 async function process (height) {
   const client = await StargateClient.connect(RPCUrl)
-  const block = await client.getBlock(height)
+
+  let block
+
+  try {
+    block = await client.getBlock(height)
+  } catch (e) {
+    throw new Error('Not found block from lcd: ', e)
+  }
 
   const orm = new WrapperOrm()
   orm.saveBlock(
@@ -42,29 +75,25 @@ async function process (height) {
   )
 
   const q = { height: height }
-  const txs = await client.searchTx(q)
+  let txs
+  try {
+    txs = await client.searchTx(q)
+  } catch (e) {
+    throw new Error('Not found txs from lcd: ', e)
+  }
 
   for (const tx of txs.values()) {
-    console.log('tx: ', tx)
-
-    let sender = {
-      value: 'none'
-    }
-    let action = {
-      value: 'none'
-    }
+    let action
+    let sender
 
     try {
       const log = logs.parseRawLog(tx.rawLog)
-      console.log('log:', log)
 
       action = logs.findAttribute(log, 'message', 'action')
-      console.log('message type:', action)
-
       sender = logs.findAttribute(log, 'message', 'sender')
-      console.log('message sender:', sender)
     } catch (error) {
       console.log('parse err: ', error)
+      continue
     }
 
     orm.saveTx(
@@ -75,4 +104,14 @@ async function process (height) {
       new Date()
     )
   }
+
+  let validatorSets
+
+  try {
+    validatorSets = await client.getTmClient().validatorsAll(height)
+  } catch (e) {
+    throw new Error('Not found validator set: ', e)
+  }
+
+  console.log('validator sets: ', validatorSets)
 }
