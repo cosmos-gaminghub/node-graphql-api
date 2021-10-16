@@ -4,11 +4,13 @@ const Sequelize = require('sequelize')
  * Actions summary:
  *
  * createTable() => "blocks", deps: []
+ * createTable() => "missed_blocks", deps: []
  * createTable() => "missions", deps: []
  * createTable() => "point_histories", deps: []
  * createTable() => "txs", deps: []
  * createTable() => "validators", deps: []
  * addIndex(height_UNIQUE) => "blocks"
+ * addIndex(operator_address_indexes) => "missed_blocks"
  * addIndex(validator_id_mission_id_unique) => "point_histories"
  * addIndex(validator_id_indexes) => "point_histories"
  * addIndex(action_indexes) => "txs"
@@ -21,7 +23,7 @@ const Sequelize = require('sequelize')
 const info = {
   revision: 1,
   name: 'inits',
-  created: '2021-10-04T13:54:09.753Z',
+  created: '2021-10-16T04:55:07.135Z',
   comment: ''
 }
 
@@ -42,6 +44,36 @@ const migrationCommands = (transaction) => [
         block_hash: { type: Sequelize.STRING(191), field: 'block_hash' },
         num_txs: { type: Sequelize.INTEGER, field: 'num_txs' },
         timestamp: { type: Sequelize.DATE, field: 'timestamp' },
+        createdAt: {
+          type: Sequelize.DATE,
+          field: 'created_at',
+          allowNull: false
+        },
+        updatedAt: {
+          type: Sequelize.DATE,
+          field: 'updated_at',
+          allowNull: false
+        }
+      },
+      { transaction }
+    ]
+  },
+  {
+    fn: 'createTable',
+    params: [
+      'missed_blocks',
+      {
+        id: {
+          type: Sequelize.INTEGER,
+          field: 'id',
+          autoIncrement: true,
+          primaryKey: true
+        },
+        height: { type: Sequelize.INTEGER, field: 'height' },
+        operator_address: {
+          type: Sequelize.STRING(191),
+          field: 'operator_address'
+        },
         createdAt: {
           type: Sequelize.DATE,
           field: 'created_at',
@@ -189,6 +221,18 @@ const migrationCommands = (transaction) => [
   {
     fn: 'addIndex',
     params: [
+      'missed_blocks',
+      ['operator_address'],
+      {
+        indexName: 'operator_address_indexes',
+        name: 'operator_address_indexes',
+        transaction
+      }
+    ]
+  },
+  {
+    fn: 'addIndex',
+    params: [
       'point_histories',
       ['validator_id', 'mission_id'],
       {
@@ -262,6 +306,10 @@ const rollbackCommands = (transaction) => [
   {
     fn: 'dropTable',
     params: ['blocks', { transaction }]
+  },
+  {
+    fn: 'dropTable',
+    params: ['missed_blocks', { transaction }]
   },
   {
     fn: 'dropTable',

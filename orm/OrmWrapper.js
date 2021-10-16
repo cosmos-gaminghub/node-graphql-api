@@ -1,4 +1,4 @@
-const { Tx, Block } = require('../models')
+const { Tx, Block, MissedBlock } = require('../models')
 
 class OrmWrapper {
   async getLatestBlockFromDB () {
@@ -25,6 +25,14 @@ class OrmWrapper {
       action: action,
       detail: detail,
       confirmed_at: confirmedAt
+    })
+      .catch(error => console.log(error))
+  }
+
+  async saveMissedBlock (height, operatorAddress) {
+    return await MissedBlock.create({
+      height: height,
+      operatorAddress: operatorAddress
     })
       .catch(error => console.log(error))
   }
