@@ -9,7 +9,7 @@ class ValidatorResponse {
   }
 
   setOperatorAddress (a) {
-    this.operator_address = a
+    this.operatorAddress = a
     return this
   }
 

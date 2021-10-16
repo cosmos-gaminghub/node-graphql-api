@@ -43,7 +43,7 @@ class Service {
     )
 
     const res = new ValidatorResponse(args.validatorID)
-      .setOperatorAddress(validator.operator_address)
+      .setOperatorAddress(validator.operatorAddress)
       .setAddress(validator.address)
       .setMoniker(validator.moniker)
       .setTotalTxs(txResult[0].totalTxs)
