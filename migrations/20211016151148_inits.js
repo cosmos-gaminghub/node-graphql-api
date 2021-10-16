@@ -7,12 +7,14 @@ const Sequelize = require('sequelize')
  * createTable() => "missed_blocks", deps: []
  * createTable() => "missions", deps: []
  * createTable() => "point_histories", deps: []
+ * createTable() => "slashing_events", deps: []
  * createTable() => "txs", deps: []
  * createTable() => "validators", deps: []
  * addIndex(height_UNIQUE) => "blocks"
- * addIndex(operator_address_indexes) => "missed_blocks"
+ * addIndex(missed_blocks_consensus_address_indexes) => "missed_blocks"
  * addIndex(validator_id_mission_id_unique) => "point_histories"
  * addIndex(validator_id_indexes) => "point_histories"
+ * addIndex(slashing_events_consensus_address_indexes) => "slashing_events"
  * addIndex(action_indexes) => "txs"
  * addIndex(sender_indexes) => "txs"
  * addIndex(hash_UNIQUE) => "txs"
@@ -23,7 +25,7 @@ const Sequelize = require('sequelize')
 const info = {
   revision: 1,
   name: 'inits',
-  created: '2021-10-16T04:55:07.135Z',
+  created: '2021-10-16T15:11:48.527Z',
   comment: ''
 }
 
@@ -70,9 +72,9 @@ const migrationCommands = (transaction) => [
           primaryKey: true
         },
         height: { type: Sequelize.INTEGER, field: 'height' },
-        operator_address: {
+        consensus_address: {
           type: Sequelize.STRING(191),
-          field: 'operator_address'
+          field: 'consensus_address'
         },
         createdAt: {
           type: Sequelize.DATE,
@@ -146,6 +148,37 @@ const migrationCommands = (transaction) => [
   {
     fn: 'createTable',
     params: [
+      'slashing_events',
+      {
+        id: {
+          type: Sequelize.INTEGER,
+          field: 'id',
+          autoIncrement: true,
+          primaryKey: true
+        },
+        height: { type: Sequelize.INTEGER, field: 'height' },
+        consensus_address: {
+          type: Sequelize.STRING(191),
+          field: 'consensus_address'
+        },
+        reason: { type: Sequelize.STRING(191), field: 'reason' },
+        createdAt: {
+          type: Sequelize.DATE,
+          field: 'created_at',
+          allowNull: false
+        },
+        updatedAt: {
+          type: Sequelize.DATE,
+          field: 'updated_at',
+          allowNull: false
+        }
+      },
+      { transaction }
+    ]
+  },
+  {
+    fn: 'createTable',
+    params: [
       'txs',
       {
         id: {
@@ -188,6 +221,10 @@ const migrationCommands = (transaction) => [
           type: Sequelize.STRING(191),
           field: 'operator_address'
         },
+        consensus_address: {
+          type: Sequelize.STRING(191),
+          field: 'consensus_address'
+        },
         moniker: { type: Sequelize.STRING(191), field: 'moniker' },
         address: { type: Sequelize.STRING(191), field: 'address' },
         createdAt: {
@@ -222,10 +259,10 @@ const migrationCommands = (transaction) => [
     fn: 'addIndex',
     params: [
       'missed_blocks',
-      ['operator_address'],
+      ['consensus_address'],
       {
-        indexName: 'operator_address_indexes',
-        name: 'operator_address_indexes',
+        indexName: 'missed_blocks_consensus_address_indexes',
+        name: 'missed_blocks_consensus_address_indexes',
         transaction
       }
     ]
@@ -252,6 +289,18 @@ const migrationCommands = (transaction) => [
       {
         indexName: 'validator_id_indexes',
         name: 'validator_id_indexes',
+        transaction
+      }
+    ]
+  },
+  {
+    fn: 'addIndex',
+    params: [
+      'slashing_events',
+      ['consensus_address'],
+      {
+        indexName: 'slashing_events_consensus_address_indexes',
+        name: 'slashing_events_consensus_address_indexes',
         transaction
       }
     ]
@@ -318,6 +367,10 @@ const rollbackCommands = (transaction) => [
   {
     fn: 'dropTable',
     params: ['point_histories', { transaction }]
+  },
+  {
+    fn: 'dropTable',
+    params: ['slashing_events', { transaction }]
   },
   {
     fn: 'dropTable',

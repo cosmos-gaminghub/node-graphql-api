@@ -8,48 +8,33 @@
 
 const { DataTypes, Model } = require('sequelize')
 
-class Tx extends Model {
+class SlashingEvent extends Model {
 }
 
 module.exports = (sequelize) => {
-  return Tx.init({
+  return SlashingEvent.init({
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true
     },
-    hash: {
+    height: {
+      type: DataTypes.INTEGER
+    },
+    consensusAddress: {
       type: DataTypes.STRING(191)
     },
-    sender: {
+    reason: {
       type: DataTypes.STRING(191)
-    },
-    action: {
-      type: DataTypes.STRING(191)
-    },
-    detail: {
-      type: DataTypes.TEXT
-    },
-    confirmedAt: {
-      type: DataTypes.DATE
     }
   }, {
     sequelize: sequelize,
-    modelName: 'Tx',
-    tableName: 'txs',
+    modelName: 'SlashingEvent',
+    tableName: 'slashing_events',
     indexes: [
       {
-        name: 'hash_UNIQUE',
-        fields: ['hash'],
-        unique: true
-      },
-      {
-        name: 'sender_indexes',
-        fields: ['sender']
-      },
-      {
-        name: 'action_indexes',
-        fields: ['action']
+        name: 'slashing_events_consensus_address_indexes',
+        fields: ['consensus_address']
       }
     ],
     timestamps: true,

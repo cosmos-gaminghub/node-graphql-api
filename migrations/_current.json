@@ -69,8 +69,8 @@
                     "field": "height",
                     "seqType": "Sequelize.INTEGER"
                 },
-                "operator_address": {
-                    "field": "operator_address",
+                "consensus_address": {
+                    "field": "consensus_address",
                     "seqType": "Sequelize.STRING(191)"
                 },
                 "createdAt": {
@@ -85,14 +85,14 @@
                 }
             },
             "indexes": {
-                "bb300762f3983b65ca609433b7b49bc6fbc48dcf": {
-                    "name": "operator_address_indexes",
+                "3db400b15447e756a5bd6cc060623be341ac5384": {
+                    "name": "missed_blocks_consensus_address_indexes",
                     "fields": [
-                        "operator_address"
+                        "consensus_address"
                     ],
                     "options": {
-                        "indexName": "operator_address_indexes",
-                        "name": "operator_address_indexes"
+                        "indexName": "missed_blocks_consensus_address_indexes",
+                        "name": "missed_blocks_consensus_address_indexes"
                     }
                 }
             }
@@ -186,6 +186,51 @@
                 }
             }
         },
+        "slashing_events": {
+            "tableName": "slashing_events",
+            "schema": {
+                "id": {
+                    "primaryKey": true,
+                    "autoIncrement": true,
+                    "field": "id",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "height": {
+                    "field": "height",
+                    "seqType": "Sequelize.INTEGER"
+                },
+                "consensus_address": {
+                    "field": "consensus_address",
+                    "seqType": "Sequelize.STRING(191)"
+                },
+                "reason": {
+                    "field": "reason",
+                    "seqType": "Sequelize.STRING(191)"
+                },
+                "createdAt": {
+                    "allowNull": false,
+                    "field": "created_at",
+                    "seqType": "Sequelize.DATE"
+                },
+                "updatedAt": {
+                    "allowNull": false,
+                    "field": "updated_at",
+                    "seqType": "Sequelize.DATE"
+                }
+            },
+            "indexes": {
+                "4626406b65c5a01f5886c97f55cadb49a39d5d40": {
+                    "name": "slashing_events_consensus_address_indexes",
+                    "fields": [
+                        "consensus_address"
+                    ],
+                    "options": {
+                        "indexName": "slashing_events_consensus_address_indexes",
+                        "name": "slashing_events_consensus_address_indexes"
+                    }
+                }
+            }
+        },
         "txs": {
             "tableName": "txs",
             "schema": {
@@ -273,6 +318,10 @@
                 },
                 "operator_address": {
                     "field": "operator_address",
+                    "seqType": "Sequelize.STRING(191)"
+                },
+                "consensus_address": {
+                    "field": "consensus_address",
                     "seqType": "Sequelize.STRING(191)"
                 },
                 "moniker": {
