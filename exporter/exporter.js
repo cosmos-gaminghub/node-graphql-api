@@ -1,6 +1,11 @@
 const { logs } = require('@cosmjs/stargate')
 
 class Exporter {
+  /**
+   * Constructor.
+   * @param {StargateClient} StargateClient
+   * @param {OrmWrapper} OrmWrapper
+   */
   constructor (client, orm) {
     this.client = client
     this.orm = orm

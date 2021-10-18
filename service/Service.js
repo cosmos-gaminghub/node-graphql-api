@@ -17,6 +17,13 @@ class Service {
 
   async fetchValidators () {
     const validators = await Validator.findAll()
+
+    // get total_txs data
+    const txResults = await sequelize.query(
+      'SELECT sender, COUNT(*) as totalTxs FROM txs GROUP BY sender HAVING(COUNT(*)>=1) ;'
+    )
+
+    console.log(txResults[0])
     return validators
   }
 

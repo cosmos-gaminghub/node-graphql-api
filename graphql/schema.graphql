@@ -21,10 +21,12 @@ type Mission {
 type Validator {
   id: Int
   moniker: String
-  operator_address: String
+  operatorAddress: String
   address: String
   totalTxs: Int
   totalPoints: Int
+  totalMissedBlock: Int
+  totalSlashedCount: Int
 }
 
 type TxCount {
