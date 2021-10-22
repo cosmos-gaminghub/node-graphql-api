@@ -27,6 +27,11 @@ class ValidatorResponse {
     this.totalPoints = a
     return this
   }
+
+  setTotalMissedBlocks (a) {
+    this.totalMissedBlocks = a
+    return this
+  }
 }
 
 module.exports = ValidatorResponse

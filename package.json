@@ -7,7 +7,8 @@
     "db:setup": "sequelize-cli db:migrate; sequelize-cli db:seed:all",
     "db:drop": "rm storage/*.sqlite3",
     "dev": " nodemon graphql/index.js",
-    "lint": " eslint ."
+    "lint": " eslint .",
+    "db:setup-prod": "sequelize-cli db:migrate --env=production; sequelize-cli db:seed:all --env=production"
   },
   "license": "MIT",
   "dependencies": {
@@ -20,6 +21,7 @@
     "express": "^4.17.1",
     "express-graphql": "^0.12.0",
     "graphql": "^15.6.0",
+    "mariadb": "^2.5.4",
     "sequelize": "^6.6.5"
   },
   "devDependencies": {
