@@ -40,7 +40,7 @@ class Service {
 
     const validatorsResponse = []
     for (const val of validators) {
-      const res = new ValidatorResponse(val.validatorID)
+      const res = new ValidatorResponse(val.id)
         .setOperatorAddress(val.operatorAddress)
         .setAddress(val.address)
         .setMoniker(val.moniker)
