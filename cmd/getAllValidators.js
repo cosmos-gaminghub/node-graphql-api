@@ -5,7 +5,7 @@ const { sha256 } = require('@cosmjs/crypto')
 const fs = require('fs')
 const stringify = require('csv-stringify/lib/sync')
 
-const RPCUrl = 'http://167.179.104.210:26657'
+const RPCUrl = 'http://167.179.113.103:26657'
 
 const main = async () => {
   let vals = []

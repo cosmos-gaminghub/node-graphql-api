@@ -5,7 +5,7 @@ const sleep = require('../utils/sleep')
 
 // const url = 'http://167.179.104.210:1317'
 // const RPCUrl = 'http://198.13.33.206:26657'
-const RPCUrl = 'http://167.179.117.190:26657'
+const RPCUrl = 'http://108.160.131.50:26657'
 
 const main = async () => {
   console.log('Starting Chain Exporter...')
