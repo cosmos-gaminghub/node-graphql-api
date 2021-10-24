@@ -38,6 +38,16 @@ class Service {
       missedBlockResultsDict[result.consensusAddress] = result.missedBlocks
     }
 
+    // get slash count
+    const slashedCountResults = await sequelize.query(
+      'SELECT consensus_address as consensusAddress, count(*) as slashedCounts from slashing_events group by consensus_address HAVING count (*) > 0;'
+    )
+
+    const slashedCountResultsDict = {}
+    for (const result of slashedCountResults[0]) {
+      slashedCountResultsDict[result.consensusAddress] = result.slashedCounts
+    }
+
     const validatorsResponse = []
     for (const val of validators) {
       const res = new ValidatorResponse(val.id)
@@ -46,10 +56,10 @@ class Service {
         .setMoniker(val.moniker)
         .setTotalTxs(txResultsDict[val.address])
         .setTotalMissedBlocks(missedBlockResultsDict[val.consensusAddress])
+        .setTotalSlashedCounts(slashedCountResultsDict[val.consensusAddress])
 
       validatorsResponse.push(res)
     }
-    console.log(validatorsResponse)
 
     return validatorsResponse
   }

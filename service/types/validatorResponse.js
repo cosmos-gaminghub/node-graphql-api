@@ -32,6 +32,11 @@ class ValidatorResponse {
     this.totalMissedBlocks = a
     return this
   }
+
+  setTotalSlashedCounts (a) {
+    this.totalSlashedCounts = a
+    return this
+  }
 }
 
 module.exports = ValidatorResponse
