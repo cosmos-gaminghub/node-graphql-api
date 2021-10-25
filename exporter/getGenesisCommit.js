@@ -4,7 +4,7 @@ const toCSV = require('../utils/toCSV')
 
 const RPCUrl = 'http://167.179.104.210:26657'
 
-const main = async () => {
+const getGenesisSigner = async () => {
   const client = await StargateClient.connect(RPCUrl)
 
   const commitResult = await client.getTmClient().commit(1)
@@ -24,4 +24,4 @@ const main = async () => {
   toCSV(validators)
 }
 
-main()
+getGenesisSigner()
