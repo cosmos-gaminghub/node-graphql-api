@@ -17,11 +17,11 @@
                     "field": "proposer",
                     "seqType": "Sequelize.STRING(191)"
                 },
-                "block_hash": {
+                "blockHash": {
                     "field": "block_hash",
                     "seqType": "Sequelize.STRING(191)"
                 },
-                "num_txs": {
+                "numTxs": {
                     "field": "num_txs",
                     "seqType": "Sequelize.INTEGER"
                 },
@@ -69,7 +69,7 @@
                     "field": "height",
                     "seqType": "Sequelize.INTEGER"
                 },
-                "consensus_address": {
+                "consensusAddress": {
                     "field": "consensus_address",
                     "seqType": "Sequelize.STRING(191)"
                 },
@@ -93,6 +93,20 @@
                     "options": {
                         "indexName": "missed_blocks_consensus_address_indexes",
                         "name": "missed_blocks_consensus_address_indexes"
+                    }
+                },
+                "906497b5c8ef5d6fa542f5b1017414030caa40b4": {
+                    "name": "unique_missed_blocks_address_height",
+                    "fields": [
+                        "height",
+                        "consensus_address"
+                    ],
+                    "unique": true,
+                    "options": {
+                        "indexName": "unique_missed_blocks_address_height",
+                        "name": "unique_missed_blocks_address_height",
+                        "indicesType": "UNIQUE",
+                        "type": "UNIQUE"
                     }
                 }
             }
@@ -140,11 +154,11 @@
                     "field": "id",
                     "seqType": "Sequelize.INTEGER"
                 },
-                "validator_id": {
+                "validatorId": {
                     "field": "validator_id",
                     "seqType": "Sequelize.INTEGER"
                 },
-                "mission_id": {
+                "missionId": {
                     "field": "mission_id",
                     "seqType": "Sequelize.INTEGER"
                 },
@@ -199,7 +213,7 @@
                     "field": "height",
                     "seqType": "Sequelize.INTEGER"
                 },
-                "consensus_address": {
+                "consensusAddress": {
                     "field": "consensus_address",
                     "seqType": "Sequelize.STRING(191)"
                 },
@@ -227,6 +241,20 @@
                     "options": {
                         "indexName": "slashing_events_consensus_address_indexes",
                         "name": "slashing_events_consensus_address_indexes"
+                    }
+                },
+                "ae2860941686651a5468cc38e822916b45e56d83": {
+                    "name": "slashing_evenrts_address_height",
+                    "fields": [
+                        "height",
+                        "consensus_address"
+                    ],
+                    "unique": true,
+                    "options": {
+                        "indexName": "slashing_evenrts_address_height",
+                        "name": "slashing_evenrts_address_height",
+                        "indicesType": "UNIQUE",
+                        "type": "UNIQUE"
                     }
                 }
             }
@@ -256,7 +284,7 @@
                     "field": "detail",
                     "seqType": "Sequelize.TEXT"
                 },
-                "confirmed_at": {
+                "confirmedAt": {
                     "field": "confirmed_at",
                     "seqType": "Sequelize.DATE"
                 },
@@ -316,11 +344,11 @@
                     "field": "id",
                     "seqType": "Sequelize.INTEGER"
                 },
-                "operator_address": {
+                "operatorAddress": {
                     "field": "operator_address",
                     "seqType": "Sequelize.STRING(191)"
                 },
-                "consensus_address": {
+                "consensusAddress": {
                     "field": "consensus_address",
                     "seqType": "Sequelize.STRING(191)"
                 },
@@ -330,6 +358,10 @@
                 },
                 "address": {
                     "field": "address",
+                    "seqType": "Sequelize.STRING(191)"
+                },
+                "consensusHexAddress": {
+                    "field": "consensus_hex_address",
                     "seqType": "Sequelize.STRING(191)"
                 },
                 "createdAt": {
