@@ -1,6 +1,7 @@
 const { sequelize, Mission, Validator } = require('../models')
 const { QueryTypes } = require('sequelize')
 const ValidatorResponse = require('./types/validatorResponse')
+const MissionResponse = require('./types/missionResponse')
 
 class Service {
   async fetchValidators () {
@@ -53,15 +54,30 @@ class Service {
   }
 
   async fetchMissionResult (args) {
+    const missions = await Mission.findAll()
+
     const result = await sequelize.query(
-      'SELECT * FROM missions WHERE id in (SELECT mission_id FROM point_histories WHERE validator_id = ?)',
+      'SELECT id FROM missions WHERE id in (SELECT mission_id FROM point_histories WHERE validator_id = ?)',
       {
         replacements: [args.validatorID],
         type: QueryTypes.SELECT
       }
     )
-    // response format: [Mission]
-    return result
+    const clearedMissionIDs = result.map(value => {
+      return value.id
+    })
+
+    const missionsResponse = []
+    for (const mission of missions) {
+      const res = new MissionResponse(mission.id)
+        .setName(mission.name)
+        .setDetail(mission.detail)
+        .setPoint(mission.point)
+        .setIsCompleted(clearedMissionIDs.includes(mission.id))
+
+      missionsResponse.push(res)
+    }
+    return missionsResponse
   }
 
   async fetchMyPoint (args) {
