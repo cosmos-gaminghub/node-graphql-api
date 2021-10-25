@@ -1,9 +1,5 @@
 type Query {
-  fetchMissions: [Mission]
-  fetchMission(missionID: Int!): Mission
   fetchValidators: [Validator]
-  fetchValidator(validatorID: Int): Validator
-  fetchTxCount(validatorID: Int): TxCount
   fetchMissionResult(validatorID: Int): [Mission]
   fetchMyPoint(validatorID: Int): MyPoint
 }
@@ -24,15 +20,10 @@ type Validator {
   operatorAddress: String
   address: String
   totalTxs: Int
-  totalPoints: Int
   totalMissedBlocks: Int
   totalSlashedCounts: Int
 }
 
-type TxCount {
-  total_txs: Int
-}
-
 type MyPoint {
-  total_point: Int
+  totalPoints: Int
 }
