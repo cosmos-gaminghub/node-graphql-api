@@ -1,4 +1,4 @@
-const { Tx, Block, MissedBlock, SlashingEvent} = require('../models')
+const { Tx, Block, MissedBlock, SlashingEvent } = require('../models')
 
 class OrmWrapper {
   async getLatestBlockFromDB () {

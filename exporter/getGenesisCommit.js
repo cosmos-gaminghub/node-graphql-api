@@ -1,5 +1,5 @@
 const { StargateClient } = require('@cosmjs/stargate')
-const { Bech32, toHex  } = require('@cosmjs/encoding')
+const { Bech32 } = require('@cosmjs/encoding')
 const toCSV = require('../utils/toCSV')
 
 const RPCUrl = 'http://167.179.104.210:26657'
