@@ -11,9 +11,11 @@ const Sequelize = require('sequelize')
  * createTable() => "txs", deps: []
  * createTable() => "validators", deps: []
  * addIndex(height_UNIQUE) => "blocks"
+ * addIndex(unique_missed_blocks_address_height) => "missed_blocks"
  * addIndex(missed_blocks_consensus_address_indexes) => "missed_blocks"
  * addIndex(validator_id_mission_id_unique) => "point_histories"
  * addIndex(validator_id_indexes) => "point_histories"
+ * addIndex(slashing_evenrts_address_height) => "slashing_events"
  * addIndex(slashing_events_consensus_address_indexes) => "slashing_events"
  * addIndex(action_indexes) => "txs"
  * addIndex(sender_indexes) => "txs"
@@ -25,7 +27,7 @@ const Sequelize = require('sequelize')
 const info = {
   revision: 1,
   name: 'inits',
-  created: '2021-10-16T15:11:48.527Z',
+  created: '2021-10-25T07:24:21.591Z',
   comment: ''
 }
 
@@ -43,8 +45,8 @@ const migrationCommands = (transaction) => [
         },
         height: { type: Sequelize.INTEGER, field: 'height' },
         proposer: { type: Sequelize.STRING(191), field: 'proposer' },
-        block_hash: { type: Sequelize.STRING(191), field: 'block_hash' },
-        num_txs: { type: Sequelize.INTEGER, field: 'num_txs' },
+        blockHash: { type: Sequelize.STRING(191), field: 'block_hash' },
+        numTxs: { type: Sequelize.INTEGER, field: 'num_txs' },
         timestamp: { type: Sequelize.DATE, field: 'timestamp' },
         createdAt: {
           type: Sequelize.DATE,
@@ -72,7 +74,7 @@ const migrationCommands = (transaction) => [
           primaryKey: true
         },
         height: { type: Sequelize.INTEGER, field: 'height' },
-        consensus_address: {
+        consensusAddress: {
           type: Sequelize.STRING(191),
           field: 'consensus_address'
         },
@@ -129,8 +131,8 @@ const migrationCommands = (transaction) => [
           autoIncrement: true,
           primaryKey: true
         },
-        validator_id: { type: Sequelize.INTEGER, field: 'validator_id' },
-        mission_id: { type: Sequelize.INTEGER, field: 'mission_id' },
+        validatorId: { type: Sequelize.INTEGER, field: 'validator_id' },
+        missionId: { type: Sequelize.INTEGER, field: 'mission_id' },
         createdAt: {
           type: Sequelize.DATE,
           field: 'created_at',
@@ -157,7 +159,7 @@ const migrationCommands = (transaction) => [
           primaryKey: true
         },
         height: { type: Sequelize.INTEGER, field: 'height' },
-        consensus_address: {
+        consensusAddress: {
           type: Sequelize.STRING(191),
           field: 'consensus_address'
         },
@@ -191,7 +193,7 @@ const migrationCommands = (transaction) => [
         sender: { type: Sequelize.STRING(191), field: 'sender' },
         action: { type: Sequelize.STRING(191), field: 'action' },
         detail: { type: Sequelize.TEXT, field: 'detail' },
-        confirmed_at: { type: Sequelize.DATE, field: 'confirmed_at' },
+        confirmedAt: { type: Sequelize.DATE, field: 'confirmed_at' },
         createdAt: {
           type: Sequelize.DATE,
           field: 'created_at',
@@ -217,16 +219,20 @@ const migrationCommands = (transaction) => [
           autoIncrement: true,
           primaryKey: true
         },
-        operator_address: {
+        operatorAddress: {
           type: Sequelize.STRING(191),
           field: 'operator_address'
         },
-        consensus_address: {
+        consensusAddress: {
           type: Sequelize.STRING(191),
           field: 'consensus_address'
         },
         moniker: { type: Sequelize.STRING(191), field: 'moniker' },
         address: { type: Sequelize.STRING(191), field: 'address' },
+        consensusHexAddress: {
+          type: Sequelize.STRING(191),
+          field: 'consensus_hex_address'
+        },
         createdAt: {
           type: Sequelize.DATE,
           field: 'created_at',
@@ -249,6 +255,20 @@ const migrationCommands = (transaction) => [
       {
         indexName: 'height_UNIQUE',
         name: 'height_UNIQUE',
+        indicesType: 'UNIQUE',
+        type: 'UNIQUE',
+        transaction
+      }
+    ]
+  },
+  {
+    fn: 'addIndex',
+    params: [
+      'missed_blocks',
+      ['height', 'consensus_address'],
+      {
+        indexName: 'unique_missed_blocks_address_height',
+        name: 'unique_missed_blocks_address_height',
         indicesType: 'UNIQUE',
         type: 'UNIQUE',
         transaction
@@ -289,6 +309,20 @@ const migrationCommands = (transaction) => [
       {
         indexName: 'validator_id_indexes',
         name: 'validator_id_indexes',
+        transaction
+      }
+    ]
+  },
+  {
+    fn: 'addIndex',
+    params: [
+      'slashing_events',
+      ['height', 'consensus_address'],
+      {
+        indexName: 'slashing_evenrts_address_height',
+        name: 'slashing_evenrts_address_height',
+        indicesType: 'UNIQUE',
+        type: 'UNIQUE',
         transaction
       }
     ]

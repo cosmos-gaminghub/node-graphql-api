@@ -1,4 +1,4 @@
-const { Tx, Block, MissedBlock, SlashEvent } = require('../models')
+const { Tx, Block, MissedBlock, SlashingEvent } = require('../models')
 
 class OrmWrapper {
   async getLatestBlockFromDB () {
@@ -38,7 +38,7 @@ class OrmWrapper {
   }
 
   async saveSlashEvent (height, consensusAddress, reason) {
-    return await SlashEvent.create({
+    return await SlashingEvent.create({
       height: height,
       consensusAddress: consensusAddress,
       reason: reason

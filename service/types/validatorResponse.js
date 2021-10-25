@@ -23,8 +23,13 @@ class ValidatorResponse {
     return this
   }
 
-  setTotalPoints (a) {
-    this.totalPoints = a
+  setTotalMissedBlocks (a) {
+    this.totalMissedBlocks = a
+    return this
+  }
+
+  setTotalSlashedCounts (a) {
+    this.totalSlashedCounts = a
     return this
   }
 }
