@@ -6,14 +6,9 @@ describe('Mission Histories', () => {
   test('Total of completed Missions is 3', async () => {
     const q = { validatorID: 1 }
     const completedMissions = await service.fetchMissionResult(q)
-    expect(completedMissions.length).toBe(3)
-  })
-})
-
-describe('Mission Histories', () => {
-  test('Total of point is 30', async () => {
-    const q = { validatorID: 1 }
-    const res = await service.fetchMyPoint(q)
-    expect(res.totalPoints).toBe(30)
+    const missionsResult = completedMissions.map(mission => {
+      return mission.isCompleted
+    })
+    expect(missionsResult).toEqual([true, true, true, false, false, false, false, false])
   })
 })
