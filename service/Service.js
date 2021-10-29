@@ -62,10 +62,11 @@ class Service {
     const txResult = await sequelize.query(
       'SELECT sender, COUNT(*) as totalTxs FROM txs where sender = ? ;',
       {
-        replacements: [args.validatorID],
+        replacements: [val.address],
         type: QueryTypes.SELECT
       }
     )
+    console.log(txResult)
 
     // get missed block data
     const missedBlockResult = await sequelize.query(
