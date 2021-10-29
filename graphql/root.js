@@ -5,6 +5,7 @@ class Root {
 
   init () {
     const resolver = {
+      fetchValidator: this.service.fetchValidator,
       fetchValidators: this.service.fetchValidators,
       fetchMissionResult: this.service.fetchMissionResult,
       fetchMyPoint: this.service.fetchMyPoint
