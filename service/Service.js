@@ -53,6 +53,49 @@ class Service {
     return validatorsResponse
   }
 
+  async fetchValidator (args) {
+    const val = await Validator.findOne(
+      { where: { id: args.validatorID } }
+    )
+
+    // get total_txs data
+    const txResult = await sequelize.query(
+      'SELECT sender, COUNT(*) as totalTxs FROM txs where sender = ? ;',
+      {
+        replacements: [args.validatorID],
+        type: QueryTypes.SELECT
+      }
+    )
+
+    // get missed block data
+    const missedBlockResult = await sequelize.query(
+      'SELECT consensus_address as consensusAddress, count(*) as missedBlocks from missed_blocks where consensus_address = ?;',
+      {
+        replacements: [val.consensusAddress],
+        type: QueryTypes.SELECT
+      }
+    )
+
+    // get slash count
+    const slashedCountResult = await sequelize.query(
+      'SELECT consensus_address as consensusAddress, count(*) as slashedCounts from slashing_events where consensus_address = ?',
+      {
+        replacements: [val.consensusAddress],
+        type: QueryTypes.SELECT
+      }
+    )
+
+    const res = new ValidatorResponse(val.id)
+      .setOperatorAddress(val.operatorAddress)
+      .setAddress(val.address)
+      .setMoniker(val.moniker)
+      .setTotalTxs(txResult[0].totalTxs)
+      .setTotalMissedBlocks(missedBlockResult[0].missedBlocks)
+      .setTotalSlashedCounts(slashedCountResult[0].slashedCounts)
+
+    return res
+  }
+
   async fetchMissionResult (args) {
     const missions = await Mission.findAll()
 

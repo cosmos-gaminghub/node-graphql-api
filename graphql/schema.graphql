@@ -1,4 +1,5 @@
 type Query {
+  fetchValidator(validatorID: Int): Validator
   fetchValidators: [Validator]
   fetchMissionResult(validatorID: Int): [Mission]
   fetchMyPoint(validatorID: Int): MyPoint
