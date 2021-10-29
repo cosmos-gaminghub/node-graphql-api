@@ -85,7 +85,18 @@ class Exporter {
         const log = logs.parseRawLog(tx.rawLog)
 
         action = logs.findAttribute(log, 'message', 'action')
-        sender = logs.findAttribute(log, 'message', 'sender')
+        // get second sender attribute from MsgDelegate & MsgWithdrawDelegatorReward
+        if (action.value === '/cosmos.staking.v1beta1.MsgDelegate' || action.value === '/cosmos.distribution.v1beta1.MsgWithdrawDelegatorReward') {
+          const msgEventAttributes = log[0].events.filter(
+            e => e.type === 'message'
+          )[0].attributes
+
+          sender = msgEventAttributes.filter(attr =>
+            attr.key === 'sender'
+          )[1]
+        } else {
+          sender = logs.findAttribute(log, 'message', 'sender')
+        }
 
         this.orm.saveTx(
           tx.hash,
